@@ -86,7 +86,8 @@ inline void teleinfo_consume(struct teleinfo_context *ctx, const char *buf, size
 
 				const char *etiquette = strtok_r(ctx->line, " ", &saveptr);
 				const char *data = strtok_r(NULL, " ", &saveptr);
-				const char *checksum = strtok_r(NULL, " ", &saveptr);
+				const char *checksum = saveptr; // do not use strtok_r here, 
+				                                // the checksum could be 0x20
 
 				if (etiquette == NULL || data == NULL || checksum == NULL) {
 					ctx->state = RESET;
