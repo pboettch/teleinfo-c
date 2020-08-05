@@ -16,13 +16,16 @@
 #include <stdlib.h>
 #include <string.h>
 
+enum teleinfo_state {
+	RESET,
+	SYNC,
+	LINE,
+	CHECKSUM,
+};
+
+
 struct teleinfo_context {
-	enum {
-		RESET,
-		SYNC,
-		LINE,
-		CHECKSUM,
-	} state;
+	enum teleinfo_state state;
 
 	char line[9 + 1 + 12 + 1 + 1 + 1];
 	char *pos;
